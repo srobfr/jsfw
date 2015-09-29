@@ -1,0 +1,19 @@
+{
+  "name": "jsfw",
+  "version": "1.0.0",
+  "description": "Generic application framework",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Robert",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "commander": "^2.8.1",
+    "ioc-core": "^1.0.1",
+    "moment": "^2.10.6",
+    "q": "^1.4.1",
+    "underscore": "^1.8.3"
+  }
+}
