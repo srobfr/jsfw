@@ -10,6 +10,7 @@ var core = new Core({
         commandsManager: __dirname + "/src/CommandsManager.js",
 
         // Commandes
+        helpCommand: __dirname + "/src/commands/HelpCommand.js",
         mainCommand: __dirname + "/src/commands/MainCommand.js"
     },
 

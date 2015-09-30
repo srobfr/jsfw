@@ -31,11 +31,16 @@ var LoggerFactory = function LoggerFactory(core) {
             var dumb = function () {
             };
 
-            var doLog = function (objects, color) {
-                var args = [
-                    Moment().format('HH:mm:ss'), // Horodatage
-                    chalk.blue('[' + name + ']') // Nom du logger
-                ];
+            var doLog = function (objects, color, showPrefix) {
+                var args = [];
+
+                if(showPrefix) {
+                    args.push(
+                        Moment().format('HH:mm:ss'), // Horodatage
+                        chalk.blue('[' + name + ']') // Nom du logger
+                    );
+                }
+
                 _.each(objects, function (v) {
                     var msg;
                     if (typeof v === 'string') {
@@ -74,11 +79,11 @@ var LoggerFactory = function LoggerFactory(core) {
             });
 
             that.log = (logLevel < 3 ? dumb : function () {
-                doLog(arguments, null);
+                doLog(arguments, null, true);
             });
 
             that.debug = (logLevel < 4 ? dumb : function () {
-                doLog(arguments, chalk.gray);
+                doLog(arguments, chalk.gray, true);
             });
         })();
     };
