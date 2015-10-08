@@ -167,7 +167,7 @@ var HelpCommand = function HelpCommand(core, loggerFactory, commandsManager) {
 
     function echoBlocks(blocks) {
         var lines = getBlocksLines(blocks, 0);
-        console.log(lines.join("\n"));
+        console.log(lines.join("\n").trim());
     }
 
     function getBlocksLines(blocks, indentLevel) {

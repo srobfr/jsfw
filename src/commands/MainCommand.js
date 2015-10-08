@@ -14,10 +14,10 @@ var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
      * Configuration de la commande.
      */
     var commandConfig = {
-        name: "mainLong",
+        name: "main",
         description: "Commande de test.",
         help: ["Cette commande est un test.", "Sur plusieurs lignes.", "", "Oui, oui."].join("\n"),
-        strictOptionsCheck: true, // Si true, les arguments qui ressemblent à des options sont rejetés.
+        strictOptionsCheck: false, // Si true, les arguments qui ressemblent à des options sont rejetés.
         arguments: [
             {
                 name: "arg1",

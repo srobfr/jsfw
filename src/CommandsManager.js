@@ -114,6 +114,15 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
             }
 
             // Puis on vérifie les contraintes
+            if(command.strictOptionsCheck
+                && result[argument.name] !== undefined) {
+                var value = (typeof result[argument.name] === "string" ? [result[argument.name]] : result[argument.name]);
+                _.each(value, function(val) {
+                    if(!val.match(/^-{1,2}\w/)) return;
+                    errors.push("Unknown option : " + val);
+                });
+            }
+
             if (!argument.required || result[argument.name] !== undefined) return;
             errors.push("The argument <" + argument.name + "> is required.");
         });
