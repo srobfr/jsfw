@@ -14,9 +14,9 @@ var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
      * Configuration de la commande.
      */
     var commandConfig = {
-        name: "main",
+        name: "mainLong",
         description: "Commande de test.",
-        doc: ["Cette commande est un test.", "Sur plusieurs lignes.", "", "Oui, oui."].join("\n"),
+        help: ["Cette commande est un test.", "Sur plusieurs lignes.", "", "Oui, oui."].join("\n"),
         strictOptionsCheck: true, // Si true, les arguments qui ressemblent à des options sont rejetés.
         arguments: [
             {
@@ -25,15 +25,22 @@ var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
                 default: "plop", // valeur par défaut. Peut être un tableau si array = true
                 required: true,
                 array: false // Si true, l'argument est une liste (qui peut être vide sauf si required = true).
+            },
+            {
+                name: "plopArg",
+                description: "Argument Plop,\nsur plusieurs lignes.",
+                default: ["plop"], // valeur par défaut. Doit être un tableau si array = true
+                required: false,
+                array: true // Si true, l'argument est une liste (qui peut être vide sauf si required = true).
             }
         ],
 
         options: [
             {
-                name: "opt1",
+                name: "option1",
                 aliases: ["-o"],
-                description: "Première option.",
-                //default: "plop", // valeur par défaut. Peut être un tableau si array = true
+                description: "Première option.\nSur plusieurs lignes.",
+                default: ["plop"], // valeur par défaut. Doit être un tableau si array = true
                 flag: false, // Si true, l'option ne prend pas de valeur. Incompatible avec required.
                 required: true, // Si true, une valeur est requise (sous forme de --foo=bar ou --foo bar).
                 array: true // Si true, il est possible de passer plusieurs fois l'option.
@@ -47,7 +54,7 @@ var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
      * Action effectuée par la commande.
      */
     function action(argv) {
-        logger.log(argv.foo, argv.bar);
+        logger.log("Arguments :", argv);
     }
 
     /**
