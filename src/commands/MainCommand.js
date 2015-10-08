@@ -1,14 +1,16 @@
-var chalk = require('chalk');
-var Moment = require('moment');
-var util = require('util');
-var _ = require('underscore');
-
 /*
  * Génère des loggers
  */
 var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
     var that = this;
     var logger = loggerFactory.getLogger();
+
+    /**
+     * Init
+     */
+    that.init = function() {
+        commandsManager.setCommand(commandConfig);
+    };
 
     /**
      * Configuration de la commande.
@@ -56,13 +58,6 @@ var MainCommand = function MainCommand(core, loggerFactory, commandsManager) {
     function action(argv) {
         logger.log("Arguments :", argv);
     }
-
-    /**
-     * Init
-     */
-    that.init = function() {
-        commandsManager.setCommand(commandConfig);
-    };
 };
 
 module.exports = MainCommand;
