@@ -43,7 +43,7 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
         command.options.push({
             name: "help",
             aliases: ["-h"],
-            description: "Shows help screen.",
+            description: "Displays the help screen.",
             flag: true
         });
 

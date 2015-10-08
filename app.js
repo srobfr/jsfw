@@ -6,8 +6,8 @@ var core = new Core({
     root: __dirname,
 
     ioc: {
-        loggerFactory: __dirname + "/src/LoggerFactory.js",
-        commandsManager: __dirname + "/src/CommandsManager.js",
+        commandsManager: __dirname + "/src/jsfw/CommandsManager.js",
+        loggerFactory: __dirname + "/src/jsfw/LoggerFactory.js",
 
         // Commandes
         helpCommand: __dirname + "/src/commands/HelpCommand.js",

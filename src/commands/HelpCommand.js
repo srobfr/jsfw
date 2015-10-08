@@ -13,11 +13,18 @@ var HelpCommand = function HelpCommand(core, loggerFactory, commandsManager) {
      */
     var commandConfig = {
         name: "help",
-        description: "Shows the help screen.",
+        description: "Displays the help screen.",
         arguments: [
             {
                 name: "command",
                 description: "Command name."
+            }
+        ],
+        options: [
+            {
+                name: "completion",
+                description: "Displays the bash / zsh completion initialization commands.",
+                flag: true
             }
         ],
         action: action
@@ -27,11 +34,19 @@ var HelpCommand = function HelpCommand(core, loggerFactory, commandsManager) {
      * Action effectuée par la commande.
      */
     function action(argv) {
-        if (!argv.command) {
-            showGlobalHelp();
-        } else {
-            showCommandHelp(argv.command);
+        if (argv.completion) {
+            return showCompletion();
         }
+
+        if (!argv.command) {
+            return showGlobalHelp();
+        }
+
+        showCommandHelp(argv.command);
+    }
+
+    function showCompletion() {
+        throw new Error("TODO");
     }
 
     /**
@@ -95,7 +110,7 @@ var HelpCommand = function HelpCommand(core, loggerFactory, commandsManager) {
             var flagsMsg = [];
             if(argument.required) flagsMsg.push(chalk.yellow("requis"));
             if(argument.array) flagsMsg.push(chalk.yellow("multiple"));
-            if(argument.default) flagsMsg.push('"' + chalk.yellow(argument.default) + '" par défaut');
+            if(argument.default) flagsMsg.push(chalk.yellow(JSON.stringify(argument.default)) + ' par défaut');
             flagsMsg = (flagsMsg.length === 0 ? "" : " (" + flagsMsg.join(", ") + ")");
 
             argsBlocks.push({
