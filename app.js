@@ -20,8 +20,4 @@ var core = new Core({
 });
 
 core.init()
-    .then(function() {
-
-        //core.components.commandsManager.run();
-    })
     .done();

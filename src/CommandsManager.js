@@ -1,5 +1,4 @@
 var fs = require('fs');
-var chalk = require('chalk');
 var _ = require('underscore');
 var Q = require('q');
 
@@ -18,6 +17,8 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
      * Initialise le composant
      */
     that.init = function () {
+        core.eventsEmitter.once("initialized", that.run);
+
         // On va chercher la version dans le fichier package.json
         return Q.nfcall(fs.readFile, core.config.root + "/package.json", "utf-8")
             .then(function (data) {
