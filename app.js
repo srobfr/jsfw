@@ -12,9 +12,11 @@ var config = extend(true, {},
             mainCommand: __dirname + "/src/commands/MainCommand.js"
         },
 
-        logs: {
-            level: 4
-        }
+        // Niveau de logs
+        logs: {level: 4},
+
+        // Parse automatiquement les paramètres de la ligne de commande.
+        autorunCommand: true
     });
 
 var core = new Core(config);

@@ -17,7 +17,11 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
      * Initialise le composant
      */
     that.init = function () {
-        core.eventsEmitter.once("initialized", that.run);
+        if(core.config.autorunCommand) {
+            core.eventsEmitter.once("initialized", function () {
+                that.run(process.argv);
+            });
+        }
 
         // On va chercher la version dans le fichier package.json
         return Q.nfcall(fs.readFile, core.config.root + "/package.json", "utf-8")
@@ -35,6 +39,10 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
      * @param command
      */
     that.setCommand = function (command) {
+        if(!command || !command.action) {
+            throw new Error("Command without action.");
+        }
+
         if (command.name === undefined) {
             command.name = "main";
         }
@@ -50,9 +58,9 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
         that.commands[command.name] = command;
     };
 
-    that.run = function () {
+    that.run = function (argv) {
         try {
-            run(process.argv.slice(2));
+            run(argv.slice(2));
         } catch (e) {
             logger.error(e.message + "\n");
             // On affiche l'aide générale.
@@ -79,7 +87,7 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
     }
 
     function parseCommand(argv, commands, result) {
-        if (argv.length < 1) return 0;
+        if (argv.length < 1 || !argv[0]) return 0;
         var re = new RegExp("^(" + _.pluck(commands, "name").join("|") + ")$");
         var m = argv[0].match(re);
         if (!m) return 0;
