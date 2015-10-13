@@ -148,7 +148,11 @@ var CommandsManager = function CommandsManager(core, loggerFactory) {
         }
 
         // Exécution de la commande.
-        command.action(result);
+        var ret = command.action(result);
+        if(ret && ret.done) {
+            // C'est une promise
+            ret.done();
+        }
 
         return r;
     }
