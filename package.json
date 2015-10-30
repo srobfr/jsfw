@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
-    "commander": "^2.8.1",
     "extend": "^3.0.0",
     "ioc-core": "^1.0.2",
     "moment": "^2.10.6",
