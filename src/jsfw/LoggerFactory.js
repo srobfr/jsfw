@@ -48,7 +48,7 @@ var LoggerFactory = function LoggerFactory(core) {
                     } else if (v instanceof Error) {
                         msg = v.stack;
                     } else {
-                        msg = util.inspect(v);
+                        msg = util.inspect(v, {showHidden: true, depth: 5 });
                     }
 
                     msg = (color ? color(msg) : msg);
